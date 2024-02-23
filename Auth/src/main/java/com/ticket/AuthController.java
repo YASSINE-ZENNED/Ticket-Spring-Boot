@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
-
+// any one can access it if it dons not have a PreAuthorize
     @GetMapping("/login")
     @PreAuthorize("permitAll()")
     public String login() {
