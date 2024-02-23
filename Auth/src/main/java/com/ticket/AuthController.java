@@ -18,7 +18,6 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    @PreAuthorize("hasRole('ROLE_client-user')")
     public String register() {
         return "Register";
     }
