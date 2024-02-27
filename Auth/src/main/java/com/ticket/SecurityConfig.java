@@ -27,7 +27,8 @@ public class SecurityConfig {
 //                .authenticated();
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers(new AntPathRequestMatcher("/auth/register")).permitAll()
+                .anyRequest().permitAll()
         );
 
         http.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtauthConverter);
