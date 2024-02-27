@@ -1,14 +1,17 @@
 package com.ticket;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
 @RestController
+@Slf4j
 @RequestMapping("/auth")
 @AllArgsConstructor
 public class AuthController {
@@ -33,11 +36,9 @@ public class AuthController {
 
    @GetMapping("/getUser")
    public UserRepresentation getUser(Principal principal) {
+        log.info("principal name: {}", principal.getName());
        return keycloakUserService1.getUserById(principal.getName());
-
    }
-
-
 
     @DeleteMapping("/delete/{userId}")
 //    @PreAuthorize("hasRole('ROLE_client-admin')")

@@ -64,8 +64,7 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
 
     @Override
     public UserRepresentation getUserById(String userId) {
-
-
+//        return  getUsersResource().get(userId).toRepresentation();
         return  getUsersResource().get(userId).toRepresentation();
     }
 

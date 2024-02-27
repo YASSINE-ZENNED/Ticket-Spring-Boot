@@ -18,7 +18,7 @@ keycloak:
   domain: http://localhost:8088
   realm: Ticket
   adminClientId: admin-cli
-  adminClientSecret: kfvDOEsFMEs4IgNHrXFlZYCqcfez7ews
+  adminClientSecret: K3DQPWFdesGe2pgCHSU3HYm2h56GG8Dd
   client: Ticket-App
   urls:
     auth: http://localhost:8088
