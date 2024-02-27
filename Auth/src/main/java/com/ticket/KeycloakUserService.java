@@ -1,5 +1,6 @@
 package com.ticket;
 
+import com.ticket.Models.UserRegistrationRecord;
 import org.keycloak.representations.idm.UserRepresentation;
 
 
