@@ -1,5 +1,7 @@
 package com.ticket;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ticket.Models.UserInfo;
 import com.ticket.Models.UserLoginRecord;
 import com.ticket.Models.UserRegistrationRecord;
 import lombok.AllArgsConstructor;
@@ -21,37 +23,14 @@ public class AuthController {
     @Autowired
     private  KeycloakUserSerivceImpl keycloakUserService1;
 
-//    @GetMapping(path = "/users")
-//    public void getUserInfo() {
-//
-//        final DefaultOidcUser user = (DefaultOidcUser) SecurityContextHolder.getContext()
-//                .getAuthentication()
-//                .getPrincipal();
-//
-//        String userId = "";
-//
-//        OidcIdToken token = user.getIdToken();
-//
-//        Map<String, Object> customClaims = token.getClaims();
-//
-//        if (customClaims.containsKey("username")) {
-//            userId = String.valueOf(customClaims.get("username"));
-//        }
-//        log.info("userid name: {}", userId);
-//        log.info("username: {}", user.getUserInfo());
-//
-//
-//
-//    }
 
-// any one can access it if it dons not have a PreAuthorize
     @GetMapping("/login")
     @PreAuthorize("permitAll()")
     public String login(@RequestBody UserLoginRecord  userLoginRecord) {
         log.info("userLoginRecord: {}", userLoginRecord.toString() );
 
 
-         return        keycloakUserService1.getUserInfo(userLoginRecord);
+         return        keycloakUserService1.getUserTokens(userLoginRecord);
 
     }
 
@@ -61,17 +40,31 @@ public class AuthController {
    }
 
    @GetMapping("/getUser")
-   public UserRepresentation getUser(Principal principal) {
-        log.info("principal name: {}", principal.getName());
-       return keycloakUserService1.getUserById(principal.getName());
+   @PreAuthorize("permitAll()")
+
+   public UserInfo getUser(@RequestBody String token) throws JsonProcessingException {
+
+        log.info("token :{}", token);
+
+
+       return keycloakUserService1.getUserInfo(token);
+
+
    }
 
     @DeleteMapping("/delete/{userId}")
-//    @PreAuthorize("hasRole('ROLE_client-admin')")
+    @PreAuthorize("hasRole('ROLE_client-admin')")
     public String deleteById( @PathVariable String userId) {
          keycloakUserService1.deleteUserById(userId);
 
         return " user deleted";
     }
+
+//    @GetMapping("/Verfiy")
+//    public void verfiyUser(Principal principal) {
+//        log.info("principal name: {}", principal.getName());
+//         keycloakUserService1.emailVerification(principal.getName());
+//    }
+
 
 }

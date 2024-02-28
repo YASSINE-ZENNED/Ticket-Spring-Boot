@@ -27,7 +27,8 @@ public class SecurityConfig {
 //                .authenticated();
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-//                .requestMatchers(new AntPathRequestMatcher("/auth/register")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/auth/register")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/auth/getUser")).permitAll()
                 .anyRequest().authenticated()
         );
 
