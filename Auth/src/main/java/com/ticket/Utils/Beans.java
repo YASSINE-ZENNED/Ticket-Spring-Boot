@@ -1,4 +1,4 @@
-package com.ticket;
+package com.ticket.Utils;
 
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;

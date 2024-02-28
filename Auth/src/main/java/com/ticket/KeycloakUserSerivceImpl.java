@@ -7,6 +7,7 @@ import com.ticket.Models.UserInfo;
 import com.ticket.Models.UserLoginRecord;
 import com.ticket.Models.UserRegistrationRecord;
 import com.ticket.Models.userLoginResponse;
+import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.Keycloak;
@@ -128,7 +129,7 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
     }
 
     @Override
-    public UserRegistrationRecord createUser(UserRegistrationRecord userRegistrationRecord) {
+    public ResponseEntity<String> createUser(UserRegistrationRecord userRegistrationRecord) {
 
         UserRepresentation user = new UserRepresentation();
         user.setEnabled(true);
@@ -136,7 +137,7 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
         user.setEmail(userRegistrationRecord.email());
         user.setFirstName(userRegistrationRecord.firstName());
         user.setLastName(userRegistrationRecord.lastName());
-        user.setEmailVerified(true);
+        user.setEmailVerified(false);
 
         CredentialRepresentation credential = new CredentialRepresentation();
         credential.setTemporary(false);
@@ -152,9 +153,26 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
      //  RealmResource realm1 = keycloak.realm(keycloakRealm);
         UsersResource userResource = getUsersResource();
 
-        userResource.create(user);
+//        userResource.create(user);
 
-        return userRegistrationRecord;
+      Response response = userResource.create(user);
+
+        log.info("response: {}",response.getStatus());
+
+
+
+        if(Objects.equals(201,response.getStatus())){
+            List<UserRepresentation> representationList = userResource.searchByUsername(userRegistrationRecord.username(), true);
+
+                UserRepresentation userRepresentation1 = representationList.stream().filter(userRepresentation -> Objects.equals(false, userRepresentation.isEmailVerified())).findFirst().orElse(null);
+
+                emailVerification(userRepresentation1.getId());
+            return   ResponseEntity.status(HttpStatus.OK).body("user have been created and email sent to verify email address");
+        }else{
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User not created");
+
+        }
+
     }
 
     private UsersResource getUsersResource() {
@@ -182,6 +200,11 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
         UsersResource usersResource = getUsersResource();
         usersResource.get(userId).sendVerifyEmail();
     }
+//   public void userijnf(String userId){
+//
+//        UsersResource usersResource = getUsersResource();
+//        usersResource.get(userId).
+//    }
 
     public UserResource getUserResource(String userId){
         UsersResource usersResource = getUsersResource();

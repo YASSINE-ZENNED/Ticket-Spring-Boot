@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,17 +26,15 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    @PreAuthorize("permitAll()")
+//    @PreAuthorize("permitAll()")
     public String login(@RequestBody UserLoginRecord  userLoginRecord) {
         log.info("userLoginRecord: {}", userLoginRecord.toString() );
-
-
          return        keycloakUserService1.getUserTokens(userLoginRecord);
 
     }
 
     @PostMapping("/register")
-    public UserRegistrationRecord register(@RequestBody UserRegistrationRecord userRegistrationRecord) {
+    public ResponseEntity<String> register(@RequestBody UserRegistrationRecord userRegistrationRecord) {
         return  keycloakUserService1.createUser(userRegistrationRecord);
    }
 
@@ -53,7 +52,7 @@ public class AuthController {
    }
 
     @DeleteMapping("/delete/{userId}")
-    @PreAuthorize("hasRole('ROLE_client-admin')")
+    @PreAuthorize("hasRole('ROLE_admin')")
     public String deleteById( @PathVariable String userId) {
          keycloakUserService1.deleteUserById(userId);
 

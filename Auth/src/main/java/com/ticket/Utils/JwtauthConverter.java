@@ -1,5 +1,6 @@
-package com.ticket;
+package com.ticket.Utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
@@ -19,6 +20,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @Component
 public class JwtauthConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
@@ -62,11 +64,15 @@ public class JwtauthConverter implements Converter<Jwt, AbstractAuthenticationTo
         resourceAccess = jwt.getClaim("resource_access");
 
         if (resourceAccess.get(resourceId) == null) {
+            log.info("resourceId: {}", resourceId);
             return Set.of();
         }
+
         resource = (Map<String, Object>) resourceAccess.get(resourceId);
 
         resourceRoles = (Collection<String>) resource.get("roles");
+
+
         return resourceRoles
                 .stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
