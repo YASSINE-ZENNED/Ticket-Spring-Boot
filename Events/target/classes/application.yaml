@@ -1,0 +1,6 @@
+server:
+  port: 8080
+
+  Spring:
+    application:
+      name:event
