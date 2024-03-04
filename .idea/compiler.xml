@@ -11,10 +11,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Events" />
+        <module name="Auth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Event" target="20" />
+      <module name="Events (1)" target="17" />
+      <module name="Events (2)" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
