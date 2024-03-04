@@ -1,16 +1,24 @@
 package com.ticket;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
 
-import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.*;
+
 
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Getter
+@Setter
 public class Ticket {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private Long UserId;
     private Long eventId;
@@ -20,7 +28,4 @@ public class Ticket {
     private String NumberOfSeats;
 
 
-    public Ticket() {
-
-    }
 }

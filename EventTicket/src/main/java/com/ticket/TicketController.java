@@ -1,15 +1,17 @@
 package com.ticket;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequestMapping("/ticket")
+@AllArgsConstructor
 public class TicketController {
-
+        private final TicketService ticketService;
     @GetMapping
-    public Ticket createTicket() {
+    public Ticket getTicket() {
 
       Ticket  ticket = new Ticket();
 
@@ -18,15 +20,11 @@ public class TicketController {
         return ticket;
 
     }
+
     @PostMapping
-    public Ticket updateTicket(@RequestBody Ticket ticket) {
-        log.info("Updating a ticket");
-        return ticket;
-    }
-    @PostMapping
-    public TicketCreationRequest CreateTicket(@RequestBody TicketCreationRequest ticket) {
+    public void CreateTicket(@RequestBody TicketCreationRequest ticket) {
         log.info("Creating a ticket");
-        return ticket;
+        ticketService.createTicket(ticket);
     }
 
 
