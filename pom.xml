@@ -15,6 +15,7 @@
   <modules>
 
     <module>Auth</module>
+      <module>EventTicket</module>
   </modules>
 
   <properties>

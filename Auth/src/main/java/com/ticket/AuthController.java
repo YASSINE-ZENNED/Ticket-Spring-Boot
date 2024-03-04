@@ -45,7 +45,6 @@ public class AuthController {
 
         log.info("token :{}", token);
 
-
        return keycloakUserService1.getUserInfo(token);
 
 
@@ -57,6 +56,7 @@ public class AuthController {
          keycloakUserService1.deleteUserById(userId);
 
         return " user deleted";
+
     }
 
 //    @GetMapping("/Verfiy")
