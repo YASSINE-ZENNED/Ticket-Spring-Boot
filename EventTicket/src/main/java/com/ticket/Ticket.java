@@ -1,15 +1,6 @@
-package com.ticket.events;
+package com.ticket;
 
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
-import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,13 +13,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class Event {
-
-
-    private String eventName;
-    private LocalDate date;
-    private String location;
+public class Ticket {
     @Id
     @GeneratedValue
     private Long id;
@@ -40,4 +25,14 @@ public class Event {
     public Long getId() {
         return id;
     }
+
+//    private Long id;
+    private Long UserId;
+    private Long eventId;
+    private String ticketType;
+    private String ticketPrice;
+    private String ticketTime;
+    private String NumberOfSeats;
+
+
 }

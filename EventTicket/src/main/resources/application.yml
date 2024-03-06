@@ -1,16 +1,16 @@
 server:
-  port: 8081
+    port: 8081
 
 spring:
   application:
-    name: event
+    name: eventTicket
   datasource:
     password: root
-    url: jdbc:postgresql://localhost:5432/Event
+    url: jdbc:postgresql://localhost:5432/EventTicket
     username: root
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

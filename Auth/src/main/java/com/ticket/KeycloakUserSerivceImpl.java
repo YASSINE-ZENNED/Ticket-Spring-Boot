@@ -54,7 +54,7 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
 
         params.put("token", Collections.singletonList(token.toString()));
 
-        params.put("client_secret", Collections.singletonList("5VOimCUrlleKMlDT6PAbUCtI3iqpc4nX"));
+        params.put("client_secret", Collections.singletonList("oB9cpN0oAvIsZcbiQEZUeRcv1ZDUIjKP"));
 
         params.put("client_id", Collections.singletonList("Ticket-App"));
 
@@ -102,7 +102,7 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
 
         params.put("username", Collections.singletonList(userLoginRecord.username()));
         params.put("password", Collections.singletonList(userLoginRecord.password()));
-        params.put("client_secret", Collections.singletonList("5VOimCUrlleKMlDT6PAbUCtI3iqpc4nX"));
+        params.put("client_secret", Collections.singletonList("oB9cpN0oAvIsZcbiQEZUeRcv1ZDUIjKP"));
         params.put("grant_type", Collections.singletonList("password"));
         params.put("client_id", Collections.singletonList("Ticket-App"));
 
@@ -162,6 +162,8 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
 
 
         if(Objects.equals(201,response.getStatus())){
+            log.info(" login works but not verfy email");
+
             List<UserRepresentation> representationList = userResource.searchByUsername(userRegistrationRecord.username(), true);
 
                 UserRepresentation userRepresentation1 = representationList.stream().filter(userRepresentation -> Objects.equals(false, userRepresentation.isEmailVerified())).findFirst().orElse(null);
@@ -189,8 +191,18 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
 
     @Override
     public void deleteUserById(String userId) {
+        Response response =  getUsersResource().delete(userId);
 
-        getUsersResource().delete(userId);
+        log.info("response: {}",response.getStatus());
+
+        if(Objects.equals(201,response.getStatus())){
+
+               ResponseEntity.status(HttpStatus.OK).body("user have been deleted");
+        }else{
+              ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User not deleted");
+
+        }
+
     }
 
 

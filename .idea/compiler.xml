@@ -15,8 +15,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Events (1)" target="17" />
-      <module name="Events (2)" target="17" />
+      <module name="EventTicket (1)" target="17" />
+      <module name="EventTicket (2)" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

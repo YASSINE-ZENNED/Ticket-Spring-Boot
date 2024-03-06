@@ -1,33 +1,58 @@
 version: '3'
 
 volumes:
-  postgres_data:
-    driver: local
+  postgres:
+  pgadmin:
+
+networks:
+  postgres:
+    driver: bridge
+  spring:
+    driver: bridge
 
 services:
-  postgres:
+  postgresTicket:
+    container_name: postgresTicket
     image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: keycloak
-  keycloak:
-    image: quay.io/keycloak/keycloak:22.0.5
-    command: start-dev
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_SCHEMA: public
-      DB_USER: keycloak
-      DB_PASSWORD: keycloak
-      KEYCLOAK_USER: keycloak
-      KEYCLOAK_PASSWORD: keycloak
-      KEYCLOAK_ADMIN: keycloak
-      KEYCLOAK_ADMIN_PASSWORD: keycloak
+      - postgres:/data/postgres
     ports:
-      - "8088:8080"
-    depends_on:
+      - "5432:5432"
+    networks:
       - postgres
+    restart: unless-stopped
+  pgadminTicket:
+    container_name: pgadminTicket
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,7 +15,11 @@
   <modules>
 
     <module>Auth</module>
+
       <module>Events</module>
+
+      <module>EventTicket</module>
+
   </modules>
 
   <properties>
