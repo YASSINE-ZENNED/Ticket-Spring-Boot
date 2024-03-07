@@ -1,20 +1,33 @@
 package com.ticket.events;
 
-import com.sun.jdi.request.EventRequest;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/events")
-public record EventController(EventService eventService) {
+@RequestMapping("/events")
+@AllArgsConstructor
+public class EventController {
+    private final EventService eventService;
+
+
+    @GetMapping
+    public Event getEvent() {
+
+        Event  event = new Event();
+
+        log.info("Event : {}", event);
+        log.info("Creating an Event");
+        return event;
+
+    }
 
     @PostMapping
-    public void registerEvent(@RequestBody EventRegestrationRequest eventRegestrationRequest){
-        log.info("new customer registration {}", eventRegestrationRequest );
-        eventService.registerEvent(eventRegestrationRequest);   }
+    public void CreateEvent(@RequestBody EventCreationRequest event) {
+        log.info("Creating an event");
+        eventService.createEvent(event);
+    }
+
 
 }

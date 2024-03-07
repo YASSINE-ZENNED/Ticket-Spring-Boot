@@ -1,17 +1,24 @@
 package com.ticket.events;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+@AllArgsConstructor
 
 @Service
+public class EventService {
 
-public record EventService(EventRepository eventRepository) {
-    public void registerEvent(EventRegestrationRequest request) {
-        Event event=Event.builder()
-                .eventName(request.eventName())
-                .date(request.date())
-                .location(request.location())
+    private final EventRepository eventRepository;
+
+    public void createEvent(EventCreationRequest eventCreationRequest) {
+        Event event = Event.builder()
+                .eventName(eventCreationRequest.eventName())
+                .date(eventCreationRequest.date())
+                .location(eventCreationRequest.location())
+
                 .build();
-        eventRepository.save(event);
-
+        eventRepository.saveAndFlush(event);
+        System.out.println("Creating a event");
     }
+
 }
