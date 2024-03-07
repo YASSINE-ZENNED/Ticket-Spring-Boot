@@ -11,5 +11,8 @@
         <module name="Auth" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Krakend" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

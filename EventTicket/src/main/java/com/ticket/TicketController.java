@@ -14,7 +14,6 @@ public class TicketController {
     public Ticket getTicket() {
 
       Ticket  ticket = new Ticket();
-
          log.info("Ticket : {}", ticket);
         log.info("Creating a ticket");
         return ticket;

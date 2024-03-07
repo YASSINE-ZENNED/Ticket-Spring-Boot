@@ -26,7 +26,7 @@ public class AuthController {
 
 
     @GetMapping("/login")
-//    @PreAuthorize("permitAll()")
+   @PreAuthorize("permitAll()")
     public String login(@RequestBody UserLoginRecord  userLoginRecord) {
         log.info("userLoginRecord: {}", userLoginRecord.toString() );
          return        keycloakUserService1.getUserTokens(userLoginRecord);
