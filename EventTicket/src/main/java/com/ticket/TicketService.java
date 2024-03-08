@@ -14,6 +14,13 @@ public class TicketService {
     private final TicketRepository ticketRepository;
 
 
+<<<<<<< HEAD
+=======
+        public List<Ticket> getTicket(){
+
+            return ticketRepository.findAll();
+        }
+>>>>>>> 26b278f0d1128a8b43335d435f97ef14fef11eaa
         public void createTicket(TicketCreationRequest ticketCreationRequest) {
             Ticket ticket = Ticket.builder()
                     .ticketType(ticketCreationRequest.ticketType())
@@ -26,5 +33,25 @@ public class TicketService {
             ticketRepository.saveAndFlush(ticket);
             System.out.println("Creating a ticket");
         }
+    public void updateTicket(Long ticketId, TicketCreationRequest ticketCreationRequest) {
+        Ticket existingTicket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new TicketNotFoundException("Ticket not found with ID: " + ticketId));
+//        existingTicket.setId(ticketCreationRequest.id());
+        existingTicket.setTicketType(ticketCreationRequest.ticketType());
+        existingTicket.setEventId(ticketCreationRequest.eventId());
+        existingTicket.setTicketPrice(ticketCreationRequest.ticketPrice());
+        existingTicket.setTicketTime(ticketCreationRequest.ticketTime());
+
+
+        ticketRepository.saveAndFlush(existingTicket);
+        System.out.println("Updating a ticket with ID: " + ticketId);
+    }
+    public void deleteTicket(Long ticketId) {
+        Ticket existingTicket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new TicketNotFoundException("Ticket not found with ID: " + ticketId));
+
+        ticketRepository.delete(existingTicket);
+        System.out.println("Deleting a ticket with ID: " + ticketId);
+    }
 
 }

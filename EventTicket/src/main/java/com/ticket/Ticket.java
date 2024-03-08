@@ -18,14 +18,6 @@ public class Ticket {
     @GeneratedValue
     private Long id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
 //    private Long id;
     private Long UserId;
     private Long eventId;
