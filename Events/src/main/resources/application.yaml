@@ -1,12 +1,12 @@
 server:
-    port: 8083
+  port: 8082
 
 spring:
   application:
-    name: eventTicket
+    name: event
   datasource:
     password: root
-    url: jdbc:postgresql://localhost:5432/EventTicket
+    url: jdbc:postgresql://localhost:5432/Event
     username: root
   jpa:
     hibernate:

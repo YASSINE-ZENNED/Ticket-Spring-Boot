@@ -3,12 +3,16 @@ package com.ticket;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @AllArgsConstructor
 
 @Service
 public class TicketService {
 
     private final TicketRepository ticketRepository;
+
 
         public void createTicket(TicketCreationRequest ticketCreationRequest) {
             Ticket ticket = Ticket.builder()

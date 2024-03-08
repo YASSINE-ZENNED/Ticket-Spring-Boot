@@ -6,20 +6,27 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
-
-
-@Data
+@Entity
 @Builder
+@Getter
+@Data
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Getter
-@Setter
 public class Ticket {
-
     @Id
     @GeneratedValue
     private Long id;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+//    private Long id;
     private Long UserId;
     private Long eventId;
     private String ticketType;

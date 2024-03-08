@@ -1,7 +1,7 @@
 version: '3'
 
 volumes:
-  postgres1:
+  postgres:
   pgadmin:
 
 networks:
@@ -19,7 +19,7 @@ services:
       POSTGRES_PASSWORD: root
       PGDATA: /data/postgres
     volumes:
-      - postgres1:/data/postgres
+      - postgres:/data/postgres
     ports:
       - "5432:5432"
     networks:
