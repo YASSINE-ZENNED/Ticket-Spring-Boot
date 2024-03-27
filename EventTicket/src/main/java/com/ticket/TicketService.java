@@ -14,13 +14,10 @@ public class TicketService {
     private final TicketRepository ticketRepository;
 
 
-<<<<<<< HEAD
-=======
         public List<Ticket> getTicket(){
 
             return ticketRepository.findAll();
         }
->>>>>>> 26b278f0d1128a8b43335d435f97ef14fef11eaa
         public void createTicket(TicketCreationRequest ticketCreationRequest) {
             Ticket ticket = Ticket.builder()
                     .ticketType(ticketCreationRequest.ticketType())
