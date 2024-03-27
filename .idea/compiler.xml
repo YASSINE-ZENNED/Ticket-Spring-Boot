@@ -11,7 +11,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EventTicket" />
+        <module name="APIGateway" />
         <module name="Events" />
+        <module name="eureka-server" />
         <module name="Auth" />
       </profile>
     </annotationProcessing>
