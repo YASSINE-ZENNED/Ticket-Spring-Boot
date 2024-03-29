@@ -10,11 +10,53 @@
   },
   "endpoints": [
     {
-      "endpoint": "/test",
-      "backend": [{
-        "url_pattern": "/evets/AllEvents",
-        "allow": ["req_uri"]
-      }]
+      "endpoint": "/AEvents",
+      "output_encoding": "no-op",
+      "method": "GET",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "disable_jwk_security": true,
+          "jwk_url": "http://host.docker.internal:8088/realms/Ticket/protocol/openid-connect/certs",
+          "kid": "hQEliliIuGlwnuIyPmebJTyD-y30kbm8ZUBoCgBee-s",
+          "propagate_claims": [
+            [
+              "tenantId",
+              "x-tenantId"
+            ],
+            [
+              "preferred_username",
+              "x-userName"
+            ],
+            [
+              "lang",
+              "x-lang"
+            ],
+            [
+              "vendorKey",
+              "x-vendorKey"
+            ],
+            [
+              "roles",
+              "x-roles"
+            ]
+          ],
+          "typ": "JWT"
+        },
+        "backend/http": {
+          "return_error_details": "backend_alias"
+        }
+      },
+      "backend": [
+        {
+          "host": [
+            "http://host.docker.internal:8082"
+          ],
+          "method": "GET",
+          "url_pattern": "/events/AllEvents"
+        }
+      ],
+      "input_headers": ["x-tenantId","x-userName","x-lang","x-vendorKey","x-roles","Content-Type"]
     }
   ]
 }
