@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  krakend:
+    image: "devopsfaith/krakend"
+    container_name: krakend
+    volumes:
+      - .:/etc/krakend
+    ports:
+      - "8080:8080"
+    command: [ "run", "-dc", "krakend.json", "" ]

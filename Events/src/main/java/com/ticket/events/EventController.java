@@ -23,6 +23,8 @@ public class EventController {
         log.info("Creating an Event");
         return eventService.getEvent();
 
+
+
     }
 
     @PostMapping("/CreateEvent")

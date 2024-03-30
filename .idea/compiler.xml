@@ -10,13 +10,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="EventTicket" />
+        <module name="APIGateway" />
         <module name="Events" />
+        <module name="eureka-server" />
         <module name="Auth" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="EventTicket (1)" target="17" />
-      <module name="EventTicket (2)" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
