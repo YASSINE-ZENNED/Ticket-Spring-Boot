@@ -1,0 +1,12 @@
+com\ticket\Models\userLoginResponse.class
+com\ticket\AuthApplication.class
+com\ticket\Utils\JwtauthConverter.class
+com\ticket\Utils\Beans.class
+com\ticket\AuthController.class
+com\ticket\Models\UserRegistrationRecord.class
+com\ticket\KeycloakUserService.class
+com\ticket\Models\UserInfo.class
+com\ticket\SecurityConfig.class
+com\ticket\Models\UserLoginRecord.class
+com\ticket\KeycloakUserSerivceImpl.class
+com\ticket\Models\RestTemplateConfig.class

@@ -1,60 +1,20 @@
 {
-  "$schema": "https://www.krakend.io/schema/krakend.json",
+  "$schema": "https://www.krakend.io/schema/v2.5/krakend.json",
   "version": 3,
-  "name": "APIGateway",
+  "echo_endpoint": true,
+  "host": ["http://localhost:8082"],
   "extra_config": {
-    "security/cors": {
-      "allow_origins": [
-        "*"
-      ],
-      "expose_headers": [
-        "Content-Length"
-      ],
-      "max_age": "12h",
-      "allow_methods": [
-        "GET",
-        "HEAD",
-        "POST"
-      ]
+    "server/virtualhost": {
+      "hosts": ["host-a.tld:1234","host-a.tld"]
     }
   },
-  "timeout": "3000ms",
-  "cache_ttl": "300s",
-  "output_encoding": "json",
-  "port": 8080,
   "endpoints": [
     {
-      "endpoint": "/auth/login",
-      "method": "GET",
-      "output_encoding": "json",
-      "backend": [
-        {
-          "url_pattern": "/auth/login",
-          "encoding": "json",
-          "sd": "static",
-          "method": "GET",
-          "host": [
-            "localhost:8081"
-          ],
-          "disable_host_sanitize": false
-        }
-      ],
-      "input_headers": [
-        "*"
-      ]
-    },
-    {
-      "endpoint": "/v1/accurate-need/{id_need}",
-      "method": "GET",
-      "output_encoding": "json",
-      "backend": [
-        {
-          "url_pattern": "/",
-          "encoding": "json",
-          "sd": "static",
-          "method": "GET"
-        }
-      ]
+      "endpoint": "/test",
+      "backend": [{
+        "url_pattern": "/evets/AllEvents",
+        "allow": ["req_uri"]
+      }]
     }
   ]
 }

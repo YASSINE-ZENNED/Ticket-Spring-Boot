@@ -1,0 +1,15 @@
+services:
+
+  Event-service:
+    image: yassinezenned/Event:latest
+    container_name: Event
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - postgresTicket
+      - eureka-server
