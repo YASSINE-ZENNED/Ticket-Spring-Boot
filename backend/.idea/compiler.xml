@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <excludeFromCompile>
-      <directory url="file://$PROJECT_DIR$/Events/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/events/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -10,11 +10,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="EventTicket" />
-        <module name="APIGateway" />
-        <module name="Events" />
+        <module name="apigateway" />
         <module name="eureka-server" />
-        <module name="Auth" />
+        <module name="auth" />
+        <module name="events" />
+        <module name="eventticket" />
       </profile>
     </annotationProcessing>
   </component>

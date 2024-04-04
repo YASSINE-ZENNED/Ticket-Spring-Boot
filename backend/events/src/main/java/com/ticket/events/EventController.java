@@ -2,9 +2,11 @@ package com.ticket.events;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -41,6 +43,27 @@ public class EventController {
         log.info("Deleting an event with ID: {}", eventId);
         eventService.deleteEvent(eventId);
     }
+    @PatchMapping("/UpdateSeat/{id}")
+    public ResponseEntity<String> updateEventSeats(@PathVariable Long id, @RequestBody UpdatSeatsRequest request) {
+        Optional<Event> eventOptional = eventService.findById(id);
+
+        if (eventOptional.isEmpty()) {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
+
+        Event event = eventOptional.get(); // Safe to unwrap since we checked for presence
 
 
+        int newNumberOfSeats =request.getNumberOfSeats();
+        if (newNumberOfSeats < 0) {
+            return ResponseEntity.badRequest().body("Number of seats cannot be negative."); // 400 Bad Request
+        } else if ( newNumberOfSeats > event.getNumberOfSeats()) {
+            return ResponseEntity.badRequest().body("Number of Seats not available"); // 400 Bad Request
+        }
+
+        event.setNumberOfSeats(event.getNumberOfSeats()-newNumberOfSeats); // Update seats using a setter
+        event = eventService.save(event);
+
+        return ResponseEntity.ok("Event hase been updated "); // 200 OK with updated event
+    }
 }

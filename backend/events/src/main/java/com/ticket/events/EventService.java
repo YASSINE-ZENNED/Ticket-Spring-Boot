@@ -1,10 +1,10 @@
 package com.ticket.events;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 
@@ -15,6 +15,10 @@ public class EventService {
 
     public List<Event> getEvent(){
         return eventRepository.findAll();
+    }
+
+    public Optional<Event> findById(Long id) {
+        return eventRepository.findById(id);
     }
 
     public void createEvent(EventCreationRequest eventCreationRequest) {
@@ -47,4 +51,8 @@ public class EventService {
         System.out.println("Deleting an event with ID: " + eventId);
     }
 
+
+    public Event save(Event event) {
+        return eventRepository.save(event);
+    }
 }

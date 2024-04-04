@@ -29,9 +29,13 @@ public class Event {
     private String eventName;
     private LocalDate date;
     private String location;
+    private int NumberOfSeats;
+
     @Id
     @GeneratedValue
     private Long id;
-
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.NumberOfSeats = numberOfSeats;
+    }
 
 }
