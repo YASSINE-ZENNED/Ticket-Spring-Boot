@@ -3,6 +3,7 @@ package com.ticket.events;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,8 +44,18 @@ public class EventController {
         log.info("Deleting an event with ID: {}", eventId);
         eventService.deleteEvent(eventId);
     }
-    @PatchMapping("/UpdateSeat/{id}")
-    public ResponseEntity<String> updateEventSeats(@PathVariable Long id, @RequestBody UpdatSeatsRequest request) {
+
+    @KafkaListener(topics = "tickets", groupId = "com.Ticket") // Use your consumer group ID
+    public void consumeTicketMessage(TicketCreationRequest ticketRequest) {
+        UpdatSeatsRequest updatSeatsRequest = new UpdatSeatsRequest(Integer.parseInt(ticketRequest.numberOfSeats()));
+        String ticketType = ticketRequest.numberOfSeats(); // Accessing a value
+        // Process the ticket message to update seats
+        updateEventSeats(ticketRequest.eventId(), updatSeatsRequest);
+    }
+
+    @PatchMapping("/UpdateSeat")
+    public ResponseEntity<String> updateEventSeats( Long id,  UpdatSeatsRequest request) {
+        log.info(" this is starting from kafka Updating an event with ID: {}", id);
         Optional<Event> eventOptional = eventService.findById(id);
 
         if (eventOptional.isEmpty()) {
