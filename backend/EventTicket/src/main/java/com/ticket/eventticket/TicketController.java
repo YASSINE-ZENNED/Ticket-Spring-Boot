@@ -1,9 +1,12 @@
-package com.ticket;
+package com.ticket.eventticket;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,27 +19,36 @@ public class TicketController {
         private final TicketService ticketService;
 
         @Autowired
-        private KafkaTemplate<String, Object> kafkaTemplate; // Adjust as needed
+        private KafkaTemplate<String, String> kafkaTemplate; // Adjust as needed
 
     @GetMapping
     public List<Ticket> getTicket() {
 
       Ticket  ticket = new Ticket();
-         log.info("Ticket : {}", ticket);
-        log.info("Creating a ticket");
+
         return ticketService.getTicket();
 
     }
 
     @PostMapping
-    public void CreateTicket(@RequestBody TicketCreationRequest ticket) {
+    public void CreateTicket(@RequestBody TicketRequest ticket) {
         log.info("Creating a ticket");
+
+        Message<String> message = MessageBuilder
+                .withPayload((ticket.numberOfSeats()+" "+ticket.eventId()))
+                .setHeader(KafkaHeaders.TOPIC, "ticket")
+                .build();
+
         ticketService.createTicket(ticket);
-        kafkaTemplate.send("tickets", ticket); // Use your actual topic name
+
+        kafkaTemplate.send(message);
+
+        // Use your actual topic name
+        log.info(" Sent ticket to Kafka: {}", message);
 
     }
     @PutMapping("/{ticketId}")
-    public void updateTicket(@PathVariable Long ticketId, @RequestBody TicketCreationRequest ticket) {
+    public void updateTicket(@PathVariable Long ticketId, @RequestBody TicketRequest ticket) {
         log.info("Updating an event with ID: {}", ticketId);
         ticketService.updateTicket(ticketId, ticket);
     }

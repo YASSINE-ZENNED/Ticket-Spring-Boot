@@ -1,7 +1,6 @@
-package com.ticket;
+package com.ticket.eventticket;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,26 +17,26 @@ public class TicketService {
 
             return ticketRepository.findAll();
         }
-        public void createTicket(TicketCreationRequest ticketCreationRequest) {
+        public void createTicket(TicketRequest ticketRequest) {
             Ticket ticket = Ticket.builder()
-                    .ticketType(ticketCreationRequest.ticketType())
-                    .ticketPrice(ticketCreationRequest.ticketPrice())
-                    .ticketTime(ticketCreationRequest.ticketTime())
-                    .NumberOfSeats(ticketCreationRequest.numberOfSeats())
-                    .eventId(ticketCreationRequest.eventId())
-                    .UserId(ticketCreationRequest.userId())
+                    .ticketType(ticketRequest.ticketType())
+                    .ticketPrice(ticketRequest.ticketPrice())
+                    .ticketTime(ticketRequest.ticketTime())
+                    .NumberOfSeats(ticketRequest.numberOfSeats())
+                    .eventId(ticketRequest.eventId())
+                    .UserId(ticketRequest.userId())
                     .build();
             ticketRepository.saveAndFlush(ticket);
             System.out.println("Creating a ticket");
         }
-    public void updateTicket(Long ticketId, TicketCreationRequest ticketCreationRequest) {
+    public void updateTicket(Long ticketId, TicketRequest ticketRequest) {
         Ticket existingTicket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new TicketNotFoundException("Ticket not found with ID: " + ticketId));
 //        existingTicket.setId(ticketCreationRequest.id());
-        existingTicket.setTicketType(ticketCreationRequest.ticketType());
-        existingTicket.setEventId(ticketCreationRequest.eventId());
-        existingTicket.setTicketPrice(ticketCreationRequest.ticketPrice());
-        existingTicket.setTicketTime(ticketCreationRequest.ticketTime());
+        existingTicket.setTicketType(ticketRequest.ticketType());
+        existingTicket.setEventId(ticketRequest.eventId());
+        existingTicket.setTicketPrice(ticketRequest.ticketPrice());
+        existingTicket.setTicketTime(ticketRequest.ticketTime());
 
 
         ticketRepository.saveAndFlush(existingTicket);

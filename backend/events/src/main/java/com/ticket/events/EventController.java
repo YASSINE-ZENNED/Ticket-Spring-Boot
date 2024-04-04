@@ -20,9 +20,7 @@ public class EventController {
     @GetMapping("/AllEvents")
     public List<Event> getEvent() {
 
-        Event  event = new Event();
 
-        log.info("Creating an Event krakend");
         return eventService.getEvent();
 
 
@@ -45,17 +43,23 @@ public class EventController {
         eventService.deleteEvent(eventId);
     }
 
-    @KafkaListener(topics = "tickets", groupId = "com.Ticket") // Use your consumer group ID
-    public void consumeTicketMessage(TicketCreationRequest ticketRequest) {
-        UpdatSeatsRequest updatSeatsRequest = new UpdatSeatsRequest(Integer.parseInt(ticketRequest.numberOfSeats()));
-        String ticketType = ticketRequest.numberOfSeats(); // Accessing a value
+    @KafkaListener(topics = "ticket", groupId = "KafkaGroup") // Use your consumer group ID
+    public void consumeTicketMessage(String ticketRequest) {
+
+
+        String[] parts = ticketRequest.split(" "); // Split the string at spaces
+
+
+        int SeatsTaken =  Integer.parseInt(parts[0]);
+        long EventId = Long.parseLong(parts[1]);
+
+log.info("Updating seats {} for event with ID: {}",SeatsTaken, EventId);
         // Process the ticket message to update seats
-        updateEventSeats(ticketRequest.eventId(), updatSeatsRequest);
+        updateEventSeats(EventId, SeatsTaken);
     }
 
     @PatchMapping("/UpdateSeat")
-    public ResponseEntity<String> updateEventSeats( Long id,  UpdatSeatsRequest request) {
-        log.info(" this is starting from kafka Updating an event with ID: {}", id);
+    public ResponseEntity<String> updateEventSeats( Long id,  int request) {
         Optional<Event> eventOptional = eventService.findById(id);
 
         if (eventOptional.isEmpty()) {
@@ -65,14 +69,13 @@ public class EventController {
         Event event = eventOptional.get(); // Safe to unwrap since we checked for presence
 
 
-        int newNumberOfSeats =request.getNumberOfSeats();
-        if (newNumberOfSeats < 0) {
+        if (request < 0) {
             return ResponseEntity.badRequest().body("Number of seats cannot be negative."); // 400 Bad Request
-        } else if ( newNumberOfSeats > event.getNumberOfSeats()) {
+        } else if ( request > event.getNumberOfSeats()) {
             return ResponseEntity.badRequest().body("Number of Seats not available"); // 400 Bad Request
         }
 
-        event.setNumberOfSeats(event.getNumberOfSeats()-newNumberOfSeats); // Update seats using a setter
+        event.setNumberOfSeats(event.getNumberOfSeats()-request); // Update seats using a setter
         event = eventService.save(event);
 
         return ResponseEntity.ok("Event hase been updated "); // 200 OK with updated event

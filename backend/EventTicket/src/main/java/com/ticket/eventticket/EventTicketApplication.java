@@ -1,4 +1,4 @@
-package com.ticket;
+package com.ticket.eventticket;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

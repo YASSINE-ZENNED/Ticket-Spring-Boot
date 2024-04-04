@@ -1,4 +1,4 @@
-package com.ticket;
+package com.ticket.eventticket;
 
 
 
