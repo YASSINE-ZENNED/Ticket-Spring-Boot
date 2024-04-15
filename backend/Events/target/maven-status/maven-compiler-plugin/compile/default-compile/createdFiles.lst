@@ -1,8 +1,0 @@
-com\ticket\events\EventRepository.class
-com\ticket\events\EventController.class
-com\ticket\events\EventNotFoundException.class
-com\ticket\events\Event.class
-com\ticket\events\EventService.class
-com\ticket\events\Event$EventBuilder.class
-com\ticket\events\EventCreationRequest.class
-com\ticket\events\EventApplication.class

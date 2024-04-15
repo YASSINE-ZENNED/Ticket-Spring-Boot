@@ -1,0 +1,25 @@
+server:
+    port: 8083
+spring:
+  application:
+    name: eventTicket
+  datasource:
+    password: root
+    url: jdbc:postgresql://postgresTEST:5432/EventTicket
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+#  zipkin:
+#    base-url: http://localhost:9411
+#  rabbitmq:
+#    addresses: localhost:5672
+eureka:
+  client:
+    server-url:
+      defaultZone: http://eureka-serverTEST:8761/eureka/

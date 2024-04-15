@@ -14,10 +14,10 @@
   <url>http://www.Ticket.com</url>
   <modules>
 
-      <module>Auth</module>
-      <module>Events</module>
-      <module>EventTicket</module>
-      <module>APIGateway</module>
+      <module>auth</module>
+      <module>events</module>
+      <module>eventticket</module>
+      <module>apigateway</module>
       <module>eureka-server</module>
 
   </modules>
@@ -26,6 +26,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <image>yassinezenned/${project.artifactId}:${project.version}</image>
+
   </properties>
 
   <dependencyManagement>
@@ -67,9 +69,50 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-
+          <version>3.0.6</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
+        <plugin>
+          <groupId>com.google.cloud.tools</groupId>
+          <artifactId>jib-maven-plugin</artifactId>
+          <version>3.1.4</version>
+          <configuration>
+            <from>
+              <!--               <image>eclipse-temurin:17@sha256:2b47a8ea946ce1e5365a1562414ed576e378b7b670cadff3fb98ebecf2890cdc</image>-->
+              <image>eclipse-temurin:17</image>
+              <platforms>
+                <platform>
+                  <architecture>amd64</architecture>
+                  <os>linux</os>
+                </platform>
+                <platform>
+                  <architecture>arm64</architecture>
+                  <os>linux</os>
+                </platform>
+              </platforms>
+            </from>
+            <to>
+              <tags>
+                <tag>latest</tag>
+              </tags>
+            </to>
+          </configuration>
+          <executions>
 
+            <execution>
+              <phase>package </phase>
+              <goals>
+                <goal>build</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
 
       </plugins>
     </pluginManagement>

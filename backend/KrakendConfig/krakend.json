@@ -1,60 +1,62 @@
 {
-  "$schema": "https://www.krakend.io/schema/krakend.json",
+  "$schema": "https://www.krakend.io/schema/v2.5/krakend.json",
   "version": 3,
-  "name": "APIGateway",
+  "echo_endpoint": true,
+  "host": ["http://localhost:8082"],
   "extra_config": {
-    "security/cors": {
-      "allow_origins": [
-        "*"
-      ],
-      "expose_headers": [
-        "Content-Length"
-      ],
-      "max_age": "12h",
-      "allow_methods": [
-        "GET",
-        "HEAD",
-        "POST"
-      ]
+    "server/virtualhost": {
+      "hosts": ["host-a.tld:1234","host-a.tld"]
     }
   },
-  "timeout": "3000ms",
-  "cache_ttl": "300s",
-  "output_encoding": "json",
-  "port": 8080,
   "endpoints": [
     {
-      "endpoint": "/auth/login",
+      "endpoint": "/AEvents",
+      "output_encoding": "no-op",
       "method": "GET",
-      "output_encoding": "json",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "disable_jwk_security": true,
+          "jwk_url": "http://host.docker.internal:8088/realms/Ticket/protocol/openid-connect/certs",
+          "kid": "hQEliliIuGlwnuIyPmebJTyD-y30kbm8ZUBoCgBee-s",
+          "propagate_claims": [
+            [
+              "tenantId",
+              "x-tenantId"
+            ],
+            [
+              "preferred_username",
+              "x-userName"
+            ],
+            [
+              "lang",
+              "x-lang"
+            ],
+            [
+              "vendorKey",
+              "x-vendorKey"
+            ],
+            [
+              "roles",
+              "x-roles"
+            ]
+          ],
+          "typ": "JWT"
+        },
+        "backend/http": {
+          "return_error_details": "backend_alias"
+        }
+      },
       "backend": [
         {
-          "url_pattern": "/auth/login",
-          "encoding": "json",
-          "sd": "static",
-          "method": "GET",
           "host": [
-            "localhost:8081"
+            "http://host.docker.internal:8082"
           ],
-          "disable_host_sanitize": false
+          "method": "GET",
+          "url_pattern": "/events/AllEvents"
         }
       ],
-      "input_headers": [
-        "*"
-      ]
-    },
-    {
-      "endpoint": "/v1/accurate-need/{id_need}",
-      "method": "GET",
-      "output_encoding": "json",
-      "backend": [
-        {
-          "url_pattern": "/",
-          "encoding": "json",
-          "sd": "static",
-          "method": "GET"
-        }
-      ]
+      "input_headers": ["x-tenantId","x-userName","x-lang","x-vendorKey","x-roles","Content-Type"]
     }
   ]
 }

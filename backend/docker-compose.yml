@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 volumes:
   postgres:
@@ -39,3 +39,4 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
