@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { EventsComponent } from './events/events.component';
+import {FormsModule} from "@angular/forms";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,12 +21,15 @@ import { EventsComponent } from './events/events.component';
     RegisterComponent,
     LoginComponent,
     EventsComponent,
-    
+
+
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ], 
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+      HttpClientModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
