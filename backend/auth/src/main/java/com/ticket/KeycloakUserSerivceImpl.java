@@ -10,6 +10,8 @@ import com.ticket.Models.userLoginResponse;
 import jakarta.ws.rs.core.Response;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONObject;
+import org.json.JSONException;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
@@ -93,7 +95,7 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
     }
 
     // A method that takes a username and password and returns a Ticket object
-    public String getUserTokens(UserLoginRecord userLoginRecord) {
+    public Object getUserTokens(UserLoginRecord userLoginRecord) {
 
         // Create a map of request parameters
 
@@ -124,8 +126,16 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
 
 // Display the token and refresh token
         System.out.println("Token: " + token);
+
         System.out.println("Refresh Token: " + refreshToken);
-            return  token;
+
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("token", token);
+        String jsonString = jsonObject.toString();
+        System.out.println("JSON String: " + jsonString);
+
+        return  jsonObject;
     }
 
     @Override

@@ -22,6 +22,7 @@ spring:
          predicates:
            - Path=/ticket/**
 
+        
 
   security:
     oauth2:
