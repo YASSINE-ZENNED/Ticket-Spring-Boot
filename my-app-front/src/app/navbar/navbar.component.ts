@@ -10,7 +10,14 @@ import {SharedService} from "../shared.service";
 })
 export class NavbarComponent {
 
-  constructor(public sharedService: SharedService) {}
+  constructor(public sharedService: SharedService, private router: Router) {}
 
+  logout() {
 
+    console.log('Logging out...');
+
+    this.sharedService.sharedVariable = null;
+    this.router.navigate(['login']);
+
+  }
 }
