@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
+import { SharedService } from '../shared.service';
 
 interface LoginCredentials {
   username: string;
@@ -19,7 +21,8 @@ export class LoginComponent {
   password = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router,public sharedService: SharedService) {}
+
 
 
 
@@ -41,6 +44,11 @@ export class LoginComponent {
       response => {
         console.log('Login successful!', response);
         const token = response.token; // Access data from the response object
+
+        this.sharedService.sharedVariable = this.email;
+
+        this.router.navigate(['']); // Navigate to the home page
+
         this.errorMessage = ''; // Clear any previous error message
       },
       error => {
