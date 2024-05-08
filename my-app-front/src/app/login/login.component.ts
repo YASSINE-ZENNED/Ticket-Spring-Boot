@@ -35,7 +35,7 @@ export class LoginComponent {
     };
     console.log("Credentials", credentials);
     this.http.post<any>( // Specify the expected response type
-      'http://localhost:8081/auth/login',
+      'http://localhost:8080/Login',
       credentials
     ).subscribe(
       response => {
