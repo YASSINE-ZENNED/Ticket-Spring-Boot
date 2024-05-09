@@ -36,6 +36,7 @@ export class LoginComponent {
       username: this.email,
       password: this.password
     };
+
     console.log("Credentials", credentials);
     this.http.post<any>( // Specify the expected response type
       'http://localhost:8080/Login',
@@ -47,6 +48,8 @@ export class LoginComponent {
 
         this.sharedService.sharedVariable = this.email;
 
+        this.sharedService.Token = token;
+         console.log("Token ::::::::::::",this.sharedService.Token);
         this.router.navigate(['']); // Navigate to the home page
 
         this.errorMessage = ''; // Clear any previous error message
