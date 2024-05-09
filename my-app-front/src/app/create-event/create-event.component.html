@@ -10,13 +10,13 @@
                         <h1 class="text-white mb-3">Create Event</h1>
 
                         <form (ngSubmit)="onSubmit()" >
+
+
                             <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control bg-white border-0" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-                                            <label for="message">Special Request</label>
-                                        </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control bg-white border-0" placeholder="event name" id="message" style="height: 100px"></textarea>
+                                        <label for="message">Event name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -42,20 +42,36 @@
 
                                 </div>
 
-                                <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control bg-white border-0" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-                                        <label for="message">Special Request</label>
+                                        <input type="date" class="form-control bg-white border-0" id="name" placeholder="Event date">
+                                        <label for="name">Date</label>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary text-white w-100 py-3" type="submit">Book Now</button>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control bg-white border-0" id="email" placeholder="number of seats">
+                                        <label for="email">number of seats</label>
+                                    </div>
                                 </div>
-                            </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control bg-white border-0" placeholder="Location" id="message" style="height: 100px"></textarea>
+                                            <label for="message">Location</label>
+                                        </div>
+                                    </div>
+
+                                <div class="col-md-6">
+
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary text-white w-100 py-3" type="submit">Create Event</button>
+                                </div>
                         </form>
                     </div>
                 </div>
             </div>
+
         </div>
         <!-- Tour Booking End -->
 
