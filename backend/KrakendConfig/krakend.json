@@ -2,12 +2,31 @@
   "$schema": "https://www.krakend.io/schema/v2.5/krakend.json",
   "version": 3,
   "echo_endpoint": true,
-  "host": ["http://localhost:8082"],
+
   "extra_config": {
+    "security/cors": {
+      "allow_origins": [
+        "*"
+      ],
+      "allow_methods": [
+        "GET",
+        "HEAD",
+        "POST"
+      ],
+      "expose_headers": [
+        "Content-Length",
+        "Content-Type"
+      ],
+      "allow_headers": [
+        "Accept-Language"
+      ]
+    } ,
     "server/virtualhost": {
       "hosts": ["host-a.tld:1234","host-a.tld"]
     }
   },
+
+
   "endpoints": [
     {
       "endpoint": "/AEvents",
@@ -57,6 +76,27 @@
         }
       ],
       "input_headers": ["x-tenantId","x-userName","x-lang","x-vendorKey","x-roles","Content-Type"]
+    },
+
+
+    {
+      "endpoint": "/Login",
+      "output_encoding": "no-op",
+      "method": "POST",
+
+      "backend": [
+        {
+          "host": [
+            "http://host.docker.internal:8081"
+          ],
+          "method": "POST",
+          "url_pattern": "/auth/login"
+        }
+      ]
     }
+
+
+
+
   ]
 }

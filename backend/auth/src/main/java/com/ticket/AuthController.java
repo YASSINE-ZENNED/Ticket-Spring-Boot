@@ -18,16 +18,18 @@ import java.security.Principal;
 @Slf4j
 @RequestMapping("/auth")
 @AllArgsConstructor
+
 public class AuthController {
 
         // this is a public route
     @Autowired
     private  KeycloakUserSerivceImpl keycloakUserService1;
 
+    @CrossOrigin(origins = "*")
 
-    @GetMapping("/login")
+    @PostMapping("/login")
    @PreAuthorize("permitAll()")
-    public String login(@RequestBody UserLoginRecord  userLoginRecord) {
+    public Object login(@RequestBody UserLoginRecord  userLoginRecord) {
         log.info("userLoginRecord: {}", userLoginRecord.toString() );
          return        keycloakUserService1.getUserTokens(userLoginRecord);
 

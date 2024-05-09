@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {SharedService} from "../shared.service";
 
 @Component({
   selector: 'app-navbar',
@@ -7,4 +10,14 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  constructor(public sharedService: SharedService, private router: Router) {}
+
+  logout() {
+
+    console.log('Logging out...');
+
+    this.sharedService.sharedVariable = null;
+    this.router.navigate(['login']);
+
+  }
 }
