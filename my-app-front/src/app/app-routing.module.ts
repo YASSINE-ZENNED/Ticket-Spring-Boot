@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import {EventsComponent} from './events/events.component';
+import { CreateEventComponent } from './create-event/create-event.component';
+import { AddTicketComponent } from './add-ticket/add-ticket.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes:Routes=[
@@ -14,6 +16,8 @@ const routes:Routes=[
   {path:'register', component:RegisterComponent},
   {path:'login', component:LoginComponent},
   {path:'events', component:EventsComponent},
+  {path:'createEvent',component: CreateEventComponent},
+  {path:'addTicket',component: AddTicketComponent},
   {path:'**', component:NotFoundComponent}
   
   
