@@ -36,7 +36,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserRegistrationRecord userRegistrationRecord) {
+    public ResponseEntity<Object> register(@RequestBody UserRegistrationRecord userRegistrationRecord) {
         return  keycloakUserService1.createUser(userRegistrationRecord);
    }
 
