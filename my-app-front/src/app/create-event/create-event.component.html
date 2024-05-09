@@ -4,12 +4,12 @@
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        
+
                     </div>
                     <div class="col-lg-6">
                         <h1 class="text-white mb-3">Create Event</h1>
-                        
-                        <form>
+
+                        <form (ngSubmit)="onSubmit()" >
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="col-12">
@@ -20,7 +20,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                  
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating date" id="date3" data-target-input="nearest">
@@ -39,9 +39,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                   
+
                                 </div>
-                               
+
                                 <div class="col-12">
                                     <div class="form-floating">
                                         <textarea class="form-control bg-white border-0" placeholder="Special Request" id="message" style="height: 100px"></textarea>
