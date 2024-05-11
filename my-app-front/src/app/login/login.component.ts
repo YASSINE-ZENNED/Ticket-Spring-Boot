@@ -53,6 +53,8 @@ export class LoginComponent {
 
         this.sharedService.Token = token;
 
+
+
         localStorage.setItem('token', this.sharedService.Token)
         localStorage.setItem('user', this.sharedService.sharedVariable)
         this.globalSrv.theItem = this.sharedService.Token; // this change will broadcast to every subscriber like below component
