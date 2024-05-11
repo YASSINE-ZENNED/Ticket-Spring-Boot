@@ -12,6 +12,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes:Routes=[
   {path:'', component:HomeComponent},
+  {
+    path: 'addT/:date/:location/:eventName/:numberOfSeats/:id', // Dynamic segments in the path
+    component: AddTicketComponent
+  },
   {path:'about', component:AboutComponent},
   {path:'register', component:RegisterComponent},
   {path:'login', component:LoginComponent},
@@ -19,8 +23,8 @@ const routes:Routes=[
   {path:'createEvent',component: CreateEventComponent},
   {path:'addTicket',component: AddTicketComponent},
   {path:'**', component:NotFoundComponent}
-  
-  
+
+
 ];
 
 @NgModule({

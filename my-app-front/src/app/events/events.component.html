@@ -9,8 +9,8 @@
 
 
       <div class="row g-4 justify-content-center">
-        <div class="col-lg-4 col-md-6" *ngFor="let event of events">
-          <div class="blog-item">
+        <div class="col-lg-4 col-md-6" *ngFor="let event of events" >
+          <div class="blog-item" [ngClass]="{'background-red': event.numberOfSeats === 0}">
             <div class="blog-img">
               <div class="blog-img-inner">
                 <img class="img-fluid w-100 rounded-top" src="assets/img/blog-1.jpg" alt="Image">
@@ -26,9 +26,9 @@
             </div>
             <div class="blog-content border border-top-0 rounded-bottom p-4">
               <p class="mb-3">Event name : {{ event.eventName}}</p>
-              <a href="#" class="h4">{{ event.title }}</a>
-              <p class="my-3">{{ event.description }}</p>
-              <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Get Tickets</a>
+<!--              <a href="#" class="h4">{{ event.title }}</a>-->
+<!--              <p class="my-3">{{ event.description }}</p>-->
+              <button  class="btn btn-primary rounded-pill py-2 px-4" (click)="openTicketPage(event)" [disabled]="event.numberOfSeats === 0">Get Tickets</button>
             </div>
           </div>
         </div>

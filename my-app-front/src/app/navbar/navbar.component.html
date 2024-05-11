@@ -28,15 +28,29 @@
                 <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
             </div>
         </div>
+
         <div class="col-lg-4 text-center text-lg-end">
             <div class="d-inline-flex align-items-center" style="height: 45px;">
-              <div *ngIf="!sharedService.sharedVariable">
+
+              <div *ngIf="!loggedIn">
                 <a routerLink="/register"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Register</small></a>
                 <a routerLink="/login"><small class="me-3 text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
               </div>
-              <div *ngIf="sharedService.sharedVariable">
-                <a ><small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{sharedService.sharedVariable}}</small></a>
+
+              <div *ngIf="this.sharedService.Role">
+                <div class="dropdown">
+                  <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-home me-2"></i> Managment Dashboard     </small></a>
+                  <div class="dropdown-menu rounded">
+                    <a class="dropdown-item"><i class="fas fa-user-alt me-2"></i> manage users </a>
+                    <a class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> manage Events</a>
+                  </div>
+                </div>
               </div>
+
+              <div *ngIf="loggedIn">
+                <a ><small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{user}}</small></a>
+              </div>
+
 
                 <div class="dropdown">
                     <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-home me-2"></i> My Dashboard</small></a>
@@ -50,6 +64,8 @@
 
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

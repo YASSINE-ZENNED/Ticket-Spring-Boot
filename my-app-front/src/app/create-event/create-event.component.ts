@@ -19,10 +19,10 @@ export class CreateEventComponent {
   errorMessage = '';
 
   event: Event = {
-    eventName: "Event3",
-    date: new Date().toISOString().split('T')[0],
-    location: "tekup",
-    numberOfSeats: 90
+    eventName: "",
+    date: null,
+    location: "",
+    numberOfSeats: 0,
   };
   onSubmit() {
     console.log('Getting __________________________ successful!');

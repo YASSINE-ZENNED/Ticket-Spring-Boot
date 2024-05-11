@@ -2,25 +2,35 @@ import { Component } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {SharedService} from "../shared.service";
-
+interface Event {
+  id: number;
+  eventName: string;
+  date: string | null;
+  location: string;
+  numberOfSeats: number;
+}
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
 export class EventsComponent {
-  events: any[] = [];
+  events: Event[] = [];
 
   constructor(private http: HttpClient, private router: Router,public sharedService: SharedService) {}
 
   errorMessage = '';
+  openTicketPage(event: Event): void {
+    console.log('Event:', event);
 
+    this.router.navigate(['/addT', event.date, event.location, event.eventName, event.numberOfSeats, event.id]);
+
+  }
 
   ngOnInit() {
     console.log('Getting __________________________ successful!');
 
    // let   token = this.sharedService.Token ;
-   //
    //  const headers = new HttpHeaders({
    //    'Authorization': `Bearer ${token}`
    //  });

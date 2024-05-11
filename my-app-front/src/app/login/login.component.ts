@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectorRef } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import { SharedService } from '../shared.service';
+
+import { jwtDecode } from "jwt-decode";
+import {AuthService} from "../auth.service";
 
 interface LoginCredentials {
   username: string;
@@ -16,12 +18,13 @@ interface LoginCredentials {
 })
 export class LoginComponent {
 
+  userRoles: string[] | undefined;
 
   email = '';
   password = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient, private router: Router,public sharedService: SharedService) {}
+  constructor(private http: HttpClient, private router: Router,public sharedService: SharedService,private globalSrv: AuthService) {}
 
 
 
@@ -49,8 +52,27 @@ export class LoginComponent {
         this.sharedService.sharedVariable = this.email;
 
         this.sharedService.Token = token;
-         console.log("Token ::::::::::::",this.sharedService.Token);
-        this.router.navigate(['']); // Navigate to the home page
+
+        localStorage.setItem('token', this.sharedService.Token)
+        localStorage.setItem('user', this.sharedService.sharedVariable)
+        this.globalSrv.theItem = this.sharedService.Token; // this change will broadcast to every subscriber like below component
+        console.log("Token :::::::-------------------:::::",localStorage.getItem('token')
+        );
+
+      try {
+        const decoded : any = jwtDecode(this.sharedService.Token);
+
+        this.sharedService.Role = decoded?.resource_access['Ticket-App']?.roles[0]?? null;
+
+         console.log("Role ::::::::::::",this.sharedService.Role);
+
+      }
+      catch(Error){
+        console.log("Error ::::::::::::",Error);
+      }
+
+
+        this.router.navigate(['']);
 
         this.errorMessage = ''; // Clear any previous error message
       },
@@ -59,27 +81,6 @@ export class LoginComponent {
         this.errorMessage = 'Login failed. Please check your credentials.'; // Set an error message
       }
     );
-
-
-
-
-
-
-
-
-
-
-    // this.login(credentials).subscribe(
-    //   response => {
-    //     console.log('Login successful!', response);
-    //     // Handle successful login (e.g., navigate to another page, show success message)
-    //     this.errorMessage = ''; // Clear any previous error message
-    //   },
-    //   error => {
-    //     console.error('Login failed:', error);
-    //     this.errorMessage = 'Login failed. Please check your credentials.'; // Set an error message
-    //   }
-    // );
   }
 
 
