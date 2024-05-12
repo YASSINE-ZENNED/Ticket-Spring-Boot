@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {SharedService} from "../shared.service";
  interface Event {
+  ownerID: string;
   eventName: string;
   date: string | null;
   location: string;
@@ -19,12 +20,19 @@ export class CreateEventComponent {
   errorMessage = '';
 
   event: Event = {
+    ownerID:'0',
     eventName: "",
     date: null,
     location: "",
     numberOfSeats: 0,
   };
   onSubmit() {
+
+
+  this.event.ownerID =localStorage.getItem('userId')??'0';
+
+    console.log('User id is  !' + this.event.ownerID);
+
     console.log('Getting __________________________ successful!');
 
     let   token = this.sharedService.Token ;

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {SharedService} from "../shared.service";
 interface Event {
+  ownerID: string;
   id: number;
   eventName: string;
   date: string | null;
@@ -17,6 +18,8 @@ interface Event {
 export class EventsComponent {
   events: Event[] = [];
 
+  userId: string = localStorage.getItem('userId')??'0';
+
   constructor(private http: HttpClient, private router: Router,public sharedService: SharedService) {}
 
   errorMessage = '';
@@ -28,6 +31,12 @@ export class EventsComponent {
   }
 
   ngOnInit() {
+
+    let userId = localStorage.getItem('userId')??'0';
+
+
+    console.log('User id is  !' + userId);
+
     console.log('Getting __________________________ successful!');
 
    // let   token = this.sharedService.Token ;

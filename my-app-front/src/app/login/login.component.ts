@@ -52,15 +52,19 @@ export class LoginComponent {
         this.sharedService.Token = token;
         localStorage.setItem('token', this.sharedService.Token)
         localStorage.setItem('user', this.sharedService.sharedVariable)
+
         this.globalSrv.theItem = this.sharedService.Token; // this change will broadcast to every subscriber like below component
         console.log("Token :::::::-------------------:::::",localStorage.getItem('token')
         );
 
       try {
         const decoded : any = jwtDecode(this.sharedService.Token);
+        console.log("Decoded ::::::::::::",decoded);
 
         this.sharedService.Role = decoded?.resource_access['Ticket-App']?.roles[0]?? null;
-        this.sharedService.Role = decoded?.resource_access.sid?? null;
+        this.sharedService.UserId = decoded?.sub?? null;
+
+        localStorage.setItem('userId', this.sharedService.UserId)
 
 
 
