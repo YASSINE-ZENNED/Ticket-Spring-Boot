@@ -18,7 +18,7 @@ interface Event {
 export class EventsComponent {
   events: Event[] = [];
 
-  userId: string = localStorage.getItem('userId')??'0';
+  userId: string = localStorage.getItem('userId')??'not set';
 
   constructor(private http: HttpClient, private router: Router,public sharedService: SharedService) {}
 
@@ -27,6 +27,12 @@ export class EventsComponent {
     console.log('Event:', event);
 
     this.router.navigate(['/addT', event.date, event.location, event.eventName, event.numberOfSeats, event.id]);
+
+  }
+  openEditPage(event: Event): void {
+    console.log('Event:', event);
+
+    this.router.navigate(['/editEvent', event.date, event.location, event.eventName, event.numberOfSeats, event.id, event.ownerID]);
 
   }
 

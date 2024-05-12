@@ -27,13 +27,10 @@
             </div>
             <div class="blog-content border border-top-0 rounded-bottom p-4">
               <p class="mb-3">Event name : {{ event.eventName}}</p>
-              <p class="mb-3">Event name : {{ event.ownerID}}</p>
-              <p class="mb-3">Event name : {{ userId}}</p>
-<!--              <a href="#" class="h4">{{ event.title }}</a>-->
 <!--              <p class="my-3">{{ event.description }}</p>-->
 
               <button  class="btn btn-primary rounded-pill py-3 px-4" (click)="openTicketPage(event)" [disabled]="event.numberOfSeats === 0">Get Tickets</button>
-              <button *ngIf="event.ownerID==userId" class="btn btn-secondary rounded-pill py-3 px-4" (click)="openTicketPage(event)" [disabled]="event.numberOfSeats === 0">Edit/Delete</button>
+              <button *ngIf="event.ownerID==userId" class="btn btn-secondary rounded-pill py-3 px-4" (click)="openEditPage(event)" >Edit/Delete</button>
 
 
             </div>

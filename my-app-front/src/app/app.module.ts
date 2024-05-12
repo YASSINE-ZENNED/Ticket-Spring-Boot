@@ -13,6 +13,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { CreateEventComponent } from './create-event/create-event.component';
 import { AddTicketComponent } from './add-ticket/add-ticket.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AddTicketComponent } from './add-ticket/add-ticket.component';
     EventsComponent,
     CreateEventComponent,
     AddTicketComponent,
+    EditEventComponent,
 
 
   ],
