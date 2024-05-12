@@ -41,6 +41,7 @@ public class EventService {
         existingEvent.setEventName(eventCreationRequest.eventName());
         existingEvent.setDate(eventCreationRequest.date());
         existingEvent.setLocation(eventCreationRequest.location());
+        existingEvent.setNumberOfSeats(eventCreationRequest.numberOfSeats());
 
         eventRepository.saveAndFlush(existingEvent);
         System.out.println("Updating an event with ID: " + eventId);
