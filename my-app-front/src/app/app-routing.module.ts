@@ -10,6 +10,7 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { AddTicketComponent } from './add-ticket/add-ticket.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {EditEventComponent} from "./edit-event/edit-event.component";
+import {MyticketsComponent} from "./mytickets/mytickets.component";
 
 const routes:Routes=[
   {path:'', component:HomeComponent},
@@ -25,6 +26,7 @@ const routes:Routes=[
   {path:'login', component:LoginComponent},
   {path:'events', component:EventsComponent},
   {path:'editEvent', component:EditEventComponent},
+  {path:'mytickets', component:MyticketsComponent},
 
   {path:'createEvent',component: CreateEventComponent},
   {path:'addTicket',component: AddTicketComponent},

@@ -27,6 +27,7 @@ export class EditEventComponent { constructor(private http: HttpClient, private 
     numberOfSeats: 0,
   };
   ngOnInit(): void {
+
     this.route.paramMap.subscribe(params => {
       this.event.date = params.get('date');
       this.event.location = params.get('location')??'';
@@ -69,6 +70,11 @@ export class EditEventComponent { constructor(private http: HttpClient, private 
 
 
     this.event.ownerID =localStorage.getItem('userId')??'0';
+
+
+      console.log('updating event:', this.event);
+
+
 
     let   token = this.sharedService.Token ;
 

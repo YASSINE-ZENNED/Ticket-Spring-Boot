@@ -1,0 +1,35 @@
+/* Adjusting the overall container */
+.container-fluid.booking {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* This centers the content vertically */
+  height: 100%; /* Set to 100% of the parent height or as needed */
+}
+
+/* Styling for the ticket display area */
+.container {
+  padding: 2rem; /* Adds padding inside the container */
+  margin-top: 2rem; /* Adds margin on top of the container */
+  width: 100%; /* Adjust width as necessary */
+  max-width: 960px; /* Maximum width of the internal container */
+  margin: auto; /* This will center the container horizontally */
+}
+
+/* Styling for each ticket block */
+.d-flex {
+  border: 1px solid #ccc; /* Optional: adds a border around each ticket */
+  padding: 20px; /* Adds padding inside each ticket block */
+  margin-bottom: 20px; /* Adds space between ticket blocks */
+  justify-content: center; /* Horizontally centers the content of the flex container */
+  align-items: center; /* Vertically centers the content of the flex container */
+}
+
+.qrcode {
+  margin-right: 50px; /* Adds right margin to QR code for spacing */
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem; /* Increases padding for larger screens */
+  }
+}

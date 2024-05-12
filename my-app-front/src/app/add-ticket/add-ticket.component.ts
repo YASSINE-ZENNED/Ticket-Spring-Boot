@@ -4,7 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SharedService} from "../shared.service";
 
 interface TicketRequest {
-  UserId: number,
+  ticketTime: string;
+  userId: string,
   eventId: number;
   fullName: string;
   eventDate: string;
@@ -25,6 +26,8 @@ export class AddTicketComponent {
   location: string | null = null;
   numberOfSeats: number = 0;
 
+  userId: string = localStorage.getItem('userId')??'not set';
+
 
   constructor(private http: HttpClient, private router: Router,public sharedService: SharedService,private route: ActivatedRoute) {
 
@@ -32,7 +35,8 @@ export class AddTicketComponent {
   }
   errorMessage = '';
   ticketRequest: TicketRequest = {
-    UserId: 0,
+    ticketTime: '',
+    userId: '',
     eventId: 0,
     fullName: '',
     eventDate: this.date ? this.date : '',
@@ -47,6 +51,8 @@ export class AddTicketComponent {
       this.date = params.get('date');
       this.location = params.get('location');
       this.numberOfSeats = Number(params.get('numberOfSeats'));
+      this.event = params.get('eventName');
+      this.ticketRequest.userId = params.get('ownerID')??'no id';
 
     });
 
@@ -58,7 +64,9 @@ export class AddTicketComponent {
     this.ticketRequest.eventDate = this.date? this.date : '';
     this.ticketRequest.location = this.location ? this.location : '';
     this.ticketRequest.eventId = Number(this.route.snapshot.paramMap.get('id'));
-    this.ticketRequest.UserId = Number(this.route.snapshot.paramMap.get('id'));
+    this.ticketRequest.userId = this.userId;
+
+    this.ticketRequest.ticketTime = this.date? this.date : '';
 
     console.log(  this.ticketRequest.eventId);
 

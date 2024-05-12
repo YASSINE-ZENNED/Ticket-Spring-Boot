@@ -14,6 +14,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { CreateEventComponent } from './create-event/create-event.component';
 import { AddTicketComponent } from './add-ticket/add-ticket.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
+import { MyticketsComponent } from './mytickets/mytickets.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { EditEventComponent } from './edit-event/edit-event.component';
     CreateEventComponent,
     AddTicketComponent,
     EditEventComponent,
+    MyticketsComponent,
 
 
   ],
@@ -34,7 +37,8 @@ import { EditEventComponent } from './edit-event/edit-event.component';
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-      HttpClientModule
+      HttpClientModule,
+      QRCodeModule
     ],
   providers: [],
   bootstrap: [AppComponent]

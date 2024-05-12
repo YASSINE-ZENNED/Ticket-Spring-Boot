@@ -1,0 +1,21 @@
+<div class="container-fluid booking py-5">
+  <div class="container py-5">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+
+<div class="container mt-4">
+  <div *ngFor="let ticket of tickets" class="d-flex align-items-center mb-4">
+    <div class="qrcode">
+      <qrcode [qrdata]="ticket.id.toString()" class="qr-code-img"></qrcode>
+    </div>
+    <div>
+      <h4> Event ID: {{ ticket.eventId }}</h4>
+      <p>Date: {{ ticket.ticketTime }}</p>
+      <p>Number of Seats: {{ ticket.numberOfSeats }}</p>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
