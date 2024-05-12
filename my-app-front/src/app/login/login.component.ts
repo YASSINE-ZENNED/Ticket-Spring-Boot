@@ -26,10 +26,8 @@ export class LoginComponent {
 
   constructor(private http: HttpClient, private router: Router,public sharedService: SharedService,private globalSrv: AuthService) {}
 
-
-
-
   onSubmit() {
+
 
 
     console.log('Email:', this.email);
@@ -52,9 +50,6 @@ export class LoginComponent {
         this.sharedService.sharedVariable = this.email;
 
         this.sharedService.Token = token;
-
-
-
         localStorage.setItem('token', this.sharedService.Token)
         localStorage.setItem('user', this.sharedService.sharedVariable)
         this.globalSrv.theItem = this.sharedService.Token; // this change will broadcast to every subscriber like below component
@@ -65,8 +60,12 @@ export class LoginComponent {
         const decoded : any = jwtDecode(this.sharedService.Token);
 
         this.sharedService.Role = decoded?.resource_access['Ticket-App']?.roles[0]?? null;
+        this.sharedService.Role = decoded?.resource_access.sid?? null;
+
+
 
          console.log("Role ::::::::::::",this.sharedService.Role);
+         console.log("UserId ::::::::::::",this.sharedService.UserId);
 
       }
       catch(Error){

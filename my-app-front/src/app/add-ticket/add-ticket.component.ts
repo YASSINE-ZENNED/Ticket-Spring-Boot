@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SharedService} from "../shared.service";
 
 interface TicketRequest {
+  UserId: number,
   eventId: number;
   fullName: string;
   eventDate: string;
@@ -18,6 +19,7 @@ interface TicketRequest {
   styleUrl: './add-ticket.component.css'
 })
 export class AddTicketComponent {
+
   event: any;
   date: string | null = null;
   location: string | null = null;
@@ -30,6 +32,7 @@ export class AddTicketComponent {
   }
   errorMessage = '';
   ticketRequest: TicketRequest = {
+    UserId: 0,
     eventId: 0,
     fullName: '',
     eventDate: this.date ? this.date : '',
@@ -55,6 +58,8 @@ export class AddTicketComponent {
     this.ticketRequest.eventDate = this.date? this.date : '';
     this.ticketRequest.location = this.location ? this.location : '';
     this.ticketRequest.eventId = Number(this.route.snapshot.paramMap.get('id'));
+    this.ticketRequest.UserId = Number(this.route.snapshot.paramMap.get('id'));
+
     console.log(  this.ticketRequest.eventId);
 
 
