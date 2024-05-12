@@ -27,6 +27,7 @@ public class Event {
 
 
     private String eventName;
+    private String ownerID;
     private LocalDate date;
     private String location;
     private int NumberOfSeats;

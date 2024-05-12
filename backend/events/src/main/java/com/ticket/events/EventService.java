@@ -27,6 +27,7 @@ public class EventService {
                 .date(eventCreationRequest.date())
                 .location(eventCreationRequest.location())
                 .NumberOfSeats(eventCreationRequest.numberOfSeats())
+                .ownerID(eventCreationRequest.ownerID())
 
                 .build();
         eventRepository.saveAndFlush(event);
