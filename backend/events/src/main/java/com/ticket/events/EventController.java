@@ -13,19 +13,18 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/events")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
+
 public class EventController {
     private final EventService eventService;
 
 
     @GetMapping("/AllEvents")
     public List<Event> getEvent() {
-
-
         return eventService.getEvent();
-
-
-
     }
+
+
 
     @PostMapping("/CreateEvent")
     public void CreateEvent(@RequestBody EventCreationRequest event) {

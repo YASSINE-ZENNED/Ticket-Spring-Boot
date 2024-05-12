@@ -15,6 +15,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/ticket")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
+
 public class TicketController {
         private final TicketService ticketService;
 
@@ -52,6 +54,12 @@ public class TicketController {
         log.info("Updating an event with ID: {}", ticketId);
         ticketService.updateTicket(ticketId, ticket);
     }
+
+    @GetMapping("/{UserId}")
+    public List<Ticket> getTicketsByUserId(@PathVariable String UserId) {
+        return ticketService.getTicketsByUserId(UserId);
+    }
+
     @DeleteMapping("/{ticketId}")
     public void deleteTicket(@PathVariable Long ticketId) {
         log.info("Deleting a ticket with ID: {}", ticketId);

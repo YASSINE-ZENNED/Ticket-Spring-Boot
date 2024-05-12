@@ -34,9 +34,10 @@ public class AuthController {
          return        keycloakUserService1.getUserTokens(userLoginRecord);
 
     }
+    @CrossOrigin(origins = "*")
 
     @PostMapping("/register")
-    public ResponseEntity<Object> register(@RequestBody UserRegistrationRecord userRegistrationRecord) {
+    public ResponseEntity<String> register(@RequestBody UserRegistrationRecord userRegistrationRecord) {
         return  keycloakUserService1.createUser(userRegistrationRecord);
    }
 
@@ -46,9 +47,7 @@ public class AuthController {
    public UserInfo getUser(@RequestBody String token) throws JsonProcessingException {
 
         log.info("token :{}", token);
-
        return keycloakUserService1.getUserInfo(token);
-
 
    }
 

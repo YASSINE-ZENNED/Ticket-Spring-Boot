@@ -24,7 +24,7 @@ public class TicketService {
                     .ticketTime(ticketRequest.ticketTime())
                     .NumberOfSeats(ticketRequest.numberOfSeats())
                     .eventId(ticketRequest.eventId())
-                    .UserId(ticketRequest.userId())
+                    .userId(ticketRequest.userId())
                     .build();
             ticketRepository.saveAndFlush(ticket);
             System.out.println("Creating a ticket");
@@ -48,6 +48,10 @@ public class TicketService {
 
         ticketRepository.delete(existingTicket);
         System.out.println("Deleting a ticket with ID: " + ticketId);
+    }
+
+    public List<Ticket> getTicketsByUserId(String UserId) {
+        return ticketRepository.findByUserId(UserId);
     }
 
 }

@@ -139,7 +139,7 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
     }
 
     @Override
-    public ResponseEntity<Object> createUser(UserRegistrationRecord userRegistrationRecord) {
+    public ResponseEntity<String> createUser(UserRegistrationRecord userRegistrationRecord) {
 
         UserRepresentation user = new UserRepresentation();
         user.setEnabled(true);
@@ -179,7 +179,6 @@ public class KeycloakUserSerivceImpl implements KeycloakUserService {
                 UserRepresentation userRepresentation1 = representationList.stream().filter(userRepresentation -> Objects.equals(false, userRepresentation.isEmailVerified())).findFirst().orElse(null);
 
                 emailVerification(userRepresentation1.getId());
-
             return   ResponseEntity.status(HttpStatus.OK).body("user have been created and email sent to verify email address");
         }else{
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User not created");

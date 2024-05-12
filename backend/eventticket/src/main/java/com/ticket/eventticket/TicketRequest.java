@@ -5,7 +5,7 @@ public record TicketRequest(String ticketType,
                             String ticketTime,
                             String numberOfSeats,
                             Long eventId,
-                            Long userId
+                            String userId
 
 
 ) {

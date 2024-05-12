@@ -65,6 +65,102 @@
       "input_headers": ["x-tenantId","x-userName","x-lang","x-vendorKey","x-roles","Content-Type"]
     },
 
+    {
+      "endpoint": "/CEvents",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "github.com/devopsfaith/krakend-cors": {
+          "allow_origins": ["*"],
+          "allow_methods": ["POST", "GET", "OPTIONS"],
+          "allow_headers": [
+            "Origin",
+            "Authorization",
+            "Content-Type",
+            "X-User-Agent"
+          ],
+          "expose_headers": [
+            "Content-Length",
+            "Content-Type"
+          ],
+          "max_age": "12h"
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/CEvents",
+          "encoding": "no-op",
+          "extra_config": {
+            "auth/validator": {
+              "alg": "RS256",
+              "disable_jwk_security": true,
+              "jwk_url": "http://host.docker.internal:8088/realms/Ticket/protocol/openid-connect/certs",
+              "kid": "hQEliliIuGlwnuIyPmebJTyD-y30kbm8ZUBoCgBee-s",
+              "propagate_claims": [
+                ["tenantId", "x-tenantId"],
+                ["preferred_username", "x-userName"],
+                ["lang", "x-lang"],
+                ["vendorKey", "x-vendorKey"],
+                ["roles", "x-roles"]
+              ],
+              "typ": "JWT"
+            },
+            "backend/http": {
+              "return_error_details": "backend_alias"
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "endpoint": "/CreateEvents",
+      "output_encoding": "no-op",
+      "method": "POST",
+
+      "backend": [
+        {
+          "host": [
+            "http://host.docker.internal:8082"
+          ],
+          "method": "POST",
+          "url_pattern": "/events/CreateEvent"
+        }
+      ]
+    },
+
+    {
+      "endpoint": "/CreateTickets",
+      "output_encoding": "no-op",
+      "method": "POST",
+
+      "backend": [
+        {
+          "host": [
+            "http://host.docker.internal:8083"
+          ],
+          "method": "POST",
+          "url_pattern": "/ticket"
+        }
+      ]
+    },
+
+
+    {
+      "endpoint": "/AllEvents",
+      "output_encoding": "no-op",
+      "method": "GET",
+
+      "backend": [
+        {
+          "host": [
+            "http://host.docker.internal:8082"
+          ],
+          "method": "GET",
+          "url_pattern": "/events/AllEvents"
+        }
+      ]
+    },
 
     {
       "endpoint": "/Login",
@@ -96,9 +192,5 @@
         }
       ]
     }
-
-
-
-
   ]
 }

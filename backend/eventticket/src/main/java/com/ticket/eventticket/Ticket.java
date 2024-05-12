@@ -19,7 +19,7 @@ public class Ticket {
     private Long id;
 
 //    private Long id;
-    private Long UserId;
+    private String userId;
     private Long eventId;
     private String ticketType;
     private String ticketPrice;
