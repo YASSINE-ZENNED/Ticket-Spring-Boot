@@ -24,6 +24,33 @@ export class MyticketsComponent {
   tickets: Ticket[] = [
 
   ];
+  canCancel(ticketTime: string): boolean {
+    const now = new Date();
+    const eventDate = new Date(ticketTime);
+    const diff = eventDate.getTime() - now.getTime();
+    return diff > 24 * 60 * 60 * 1000; // Difference greater than 24 hours in milliseconds
+  }
+
+  deleteTicket(  Tid : number){
+
+    this.http.delete<any>( // Specify the expected response type
+
+      `http://localhost:8083/ticket/${Tid}`
+    ).subscribe(
+      response => {
+        this.tickets = response;
+
+        console.log('delete successful!', response);
+
+        location.reload();
+
+      },
+      error => {
+        console.error('delete events  failed:', error);
+      }
+    );
+
+  }
 
 
   ngOnInit() {

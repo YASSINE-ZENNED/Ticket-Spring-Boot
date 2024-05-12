@@ -34,6 +34,7 @@ export class NavbarComponent {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
 
+
     console.log("Token :::::::-------------------:::::",user);
 
     this.loggedIn = token !== null; // Set to true if token exists, false otherwise
