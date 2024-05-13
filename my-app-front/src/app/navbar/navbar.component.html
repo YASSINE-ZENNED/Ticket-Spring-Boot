@@ -37,15 +37,18 @@
                 <a routerLink="/login"><small class="me-3 text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
               </div>
 
-              <div *ngIf="this.sharedService.Role">
+              <div *ngIf="IsAdmin">
                 <div class="dropdown">
                   <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-home me-2"></i> Managment Dashboard     </small></a>
                   <div class="dropdown-menu rounded">
                     <a class="dropdown-item"><i class="fas fa-user-alt me-2"></i> manage users </a>
                     <a class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> manage Events</a>
                   </div>
+
                 </div>
               </div>
+
+
 
 
               <div *ngIf="loggedIn">

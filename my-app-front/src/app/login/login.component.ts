@@ -65,6 +65,7 @@ export class LoginComponent {
         this.sharedService.UserId = decoded?.sub?? null;
 
         localStorage.setItem('userId', this.sharedService.UserId)
+        localStorage.setItem('Role', this.sharedService.Role)
 
 
 

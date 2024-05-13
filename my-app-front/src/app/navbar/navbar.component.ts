@@ -13,6 +13,7 @@ import {AuthService} from "../auth.service";
 export class NavbarComponent {
   loggedIn: boolean = false;
   user: string= "";
+  IsAdmin: boolean = false;
 
   constructor(public sharedService: SharedService, private router: Router,private globalSrv: AuthService) {
 
@@ -32,8 +33,12 @@ export class NavbarComponent {
 
   checkLoginStatus() {
     const token = localStorage.getItem('token');
+
     const user = localStorage.getItem('user');
 
+    this.IsAdmin = localStorage.getItem('Role')== 'admin';
+
+    console.log("IsAdmin :::::::-------------------:::::",this.IsAdmin);
 
     console.log("Token :::::::-------------------:::::",user);
 

@@ -8,14 +8,13 @@
     <div class="qrcode">
       <qrcode [qrdata]="ticket.id.toString()" class="qr-code-img"></qrcode>
     </div>
+
     <div>
       <h4> Event ID: {{ ticket.eventId }}</h4>
       <p>Date: {{ ticket.ticketTime }}</p>
       <p>Number of Seats: {{ ticket.numberOfSeats }}</p>
       <button *ngIf="canCancel(ticket.ticketTime)" (click)="deleteTicket(ticket.id)" class="btn btn-warning">Cancel</button>
-
       <button *ngIf="canCancel(ticket.ticketTime)" (click)="deleteTicket(ticket.id)" class="btn btn-warning">update</button>
-
     </div>
   </div>
 </div>
