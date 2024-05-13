@@ -60,9 +60,9 @@
                     <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-home me-2"></i> My Dashboard</small></a>
                     <div class="dropdown-menu rounded">
                         <a class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                        <a class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> Inbox</a>
+<!--                        <a class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> Inbox</a>-->
                         <a class="dropdown-item"><i class="fas fa-bell me-2"></i> Notifications</a>
-                        <a class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
+<!--                        <a class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>-->
                         <a class="dropdown-item" (click)="logout()" ><i class="fas fa-power-off me-2"></i> Log Out</a>
 
 
@@ -80,8 +80,8 @@
 <div class="container-fluid position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
         <a href="" class="navbar-brand p-0">
-            <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Travela</h1>
-            <!-- <img src="img/logo.png" alt="Logo"> -->
+            <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Eventix</h1>
+<!--             <img src="./app/navbar/logo.png" alt="Logo">-->
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
@@ -89,25 +89,14 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
                 <a routerLink="/" class="nav-item nav-link active">Home</a>
-                <a routerLink="/about" class="nav-item nav-link">About</a>
-                <a  routerLink="/events" class="nav-item nav-link">Events</a>
-                <a  routerLink="/createEvent"class="nav-item nav-link">Packages</a>
-                <a routerLink="/addTicket" class="nav-item nav-link">Blog</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu m-0">
-                        <a  class="dropdown-item">Destination</a>
-                        <a class="dropdown-item">Explore Tour</a>
-                        <a class="dropdown-item">Travel Booking</a>
-                        <a  class="dropdown-item">Our Gallery</a>
-                        <a class="dropdown-item">Travel Guides</a>
-                        <a  class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
-                    </div>
-                </div>
-                <a href="/mytickets" class="nav-item nav-link">Contact</a>
+<!--                <a routerLink="/about" class="nav-item nav-link">About</a>-->
+                <a  routerLink="/events" class="nav-item nav-link">Event List</a>
+                <a  routerLink="/createEvent"class="nav-item nav-link">Create Event</a>
+<!--                <a routerLink="/addTicket" class="nav-item nav-link">Blog</a>-->
+
+                <a href="/mytickets" class="nav-item nav-link">My Tickets</a>
             </div>
-            <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
+            <a routerLink="/events" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Get Tickets Now</a>
         </div>
     </nav>
 </div>
