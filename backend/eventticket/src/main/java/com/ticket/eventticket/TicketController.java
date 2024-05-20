@@ -49,6 +49,7 @@ public class TicketController {
         log.info(" Sent ticket to Kafka: {}", message);
 
     }
+
     @PutMapping("/{ticketId}")
     public void updateTicket(@PathVariable Long ticketId, @RequestBody TicketRequest ticket) {
         log.info("Updating an event with ID: {}", ticketId);
@@ -59,11 +60,19 @@ public class TicketController {
     public List<Ticket> getTicketsByUserId(@PathVariable String UserId) {
         return ticketService.getTicketsByUserId(UserId);
     }
+    @GetMapping("/verfiy/{TicketId}")
+    public Ticket getTicketsById(@PathVariable Long TicketId) {
+
+        return ticketService.getTicketsById(TicketId);
+
+    }
 
     @DeleteMapping("/{ticketId}")
     public void deleteTicket(@PathVariable Long ticketId) {
+
         log.info("Deleting a ticket with ID: {}", ticketId);
         ticketService.deleteTicket(ticketId);
+
     }
 
 

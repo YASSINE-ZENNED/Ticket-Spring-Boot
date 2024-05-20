@@ -53,5 +53,15 @@ public class TicketService {
     public List<Ticket> getTicketsByUserId(String UserId) {
         return ticketRepository.findByUserId(UserId);
     }
+    public Ticket getTicketsById(Long id) {
+
+
+      return    ticketRepository.findById(id)
+                .orElseThrow(() -> new TicketNotFoundException("Ticket not found with ID: " + id));
+
+
+    }
+
+
 
 }
